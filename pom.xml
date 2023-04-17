@@ -29,13 +29,13 @@
     -->
 
     <!-- gsp-dba-maven-pluginが使用するデータベース設定 -->
-    <nablarch.db.jdbcDriver>org.h2.Driver</nablarch.db.jdbcDriver>
-    <nablarch.db.url>jdbc:h2:./h2/db/SAMPLE</nablarch.db.url>
-    <nablarch.db.adminUser>SAMPLE</nablarch.db.adminUser>
-    <nablarch.db.adminPassword>SAMPLE</nablarch.db.adminPassword>
-    <nablarch.db.user>SAMPLE</nablarch.db.user>
-    <nablarch.db.password>SAMPLE</nablarch.db.password>
-    <nablarch.db.schema>PUBLIC</nablarch.db.schema>
+    <nablarch.db.jdbcDriver>org.postgresql.Driver</nablarch.db.jdbcDriver>
+    <nablarch.db.url>jdbc:postgresql://localhost:5432/postgres</nablarch.db.url>
+    <nablarch.db.adminUser>postgres</nablarch.db.adminUser>
+    <nablarch.db.adminPassword>pass123-</nablarch.db.adminPassword>
+    <nablarch.db.user>postgres</nablarch.db.user>
+    <nablarch.db.password>pass123-</nablarch.db.password>
+    <nablarch.db.schema>public</nablarch.db.schema>
   </properties>
 
   <!--
@@ -60,12 +60,10 @@
           <groupId>com.nablarch.framework</groupId>
           <artifactId>nablarch-fw-web-hotdeploy</artifactId>
         </dependency>
-        <!-- TODO: プロジェクトで使用するDB製品にあわせたJDBCドライバに修正してください。 -->
         <dependency>
-          <groupId>com.h2database</groupId>
-          <artifactId>h2</artifactId>
-          <version>2.1.214</version>
-          <scope>runtime</scope>
+          <groupId>org.postgresql</groupId>
+          <artifactId>postgresql</artifactId>
+          <version>42.6.0</version>
         </dependency>
         <dependency>
           <groupId>com.zaxxer</groupId>
@@ -123,12 +121,10 @@
               </execution>
             </executions>
             <dependencies>
-              <!-- プロジェクトで使用するDB製品にあわせたJDBCドライバに上書きする -->
               <dependency>
-                <groupId>com.h2database</groupId>
-                <artifactId>h2</artifactId>
-                <version>2.1.214</version>
-                <scope>runtime</scope>
+                <groupId>org.postgresql</groupId>
+                <artifactId>postgresql</artifactId>
+                <version>42.6.0</version>
               </dependency>
             </dependencies>
           </plugin>
@@ -161,12 +157,10 @@
               </execution>
             </executions>
             <dependencies>
-              <!-- プロジェクトで使用するDB製品にあわせたJDBCドライバに上書きする -->
               <dependency>
-                <groupId>com.h2database</groupId>
-                <artifactId>h2</artifactId>
-                <version>2.1.214</version>
-                <scope>runtime</scope>
+                <groupId>org.postgresql</groupId>
+                <artifactId>postgresql</artifactId>
+                <version>42.6.0</version>
               </dependency>
               <!-- このプラグインを Java 17 で動かすため -->
               <dependency>

@@ -1,0 +1,18 @@
+version: "3.8"
+services:
+  postgres:
+    image: postgres:15.2-alpine
+    environment:
+      POSTGRES_PASSWORD: pass123-
+    ports:
+      - "5432:5432"
+
+  psql:
+      image: postgres:15.2-alpine
+      # profiles を指定することで docker-compose up の対象外にする。
+      profiles:
+        - cli
+      entrypoint: psql
+      environment:
+        PGPASSWORD: pass123-
+      command: -h postgres -U postgres
