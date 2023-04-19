@@ -100,6 +100,22 @@
   <!-- ダイアレクト設定 -->
   <component name="dialect" class="nablarch.core.db.dialect.PostgreSQLDialect" />
 
+  <!-- 認証コンポーネント設定 -->
+  <!-- https://nablarch.github.io/docs/LATEST/doc/examples/01/index.html#systemaccountauthenticator -->
+  <component name="passwordEncryptor" class="com.example.common.authentication.encrypt.PBKDF2PasswordEncryptor">
+    <property name="fixedSalt" value="1604d9b27d1c9ca046ab6cafc3b7830b"/>
+  </component>
+  <component name="authenticator" class="com.example.common.authentication.SystemAccountAuthenticator">
+    <property name="failedCountToLock" value="5"/>
+    <property name="passwordEncryptor" ref="passwordEncryptor"/>
+    <property name="dbManager">
+      <component class="nablarch.core.db.transaction.SimpleDbTransactionManager">
+        <property name="dbTransactionName" value="authenticator"/>
+        <property name="connectionFactory" ref="connectionFactory"/>
+        <property name="transactionFactory" ref="transactionFactory"/>
+      </component>
+    </property>
+  </component>
 
   <!-- ハンドラキュー構成 -->
   <component name="webFrontController"
