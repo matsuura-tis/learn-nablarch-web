@@ -1,4 +1,13 @@
 <routes>
-    <root to="Sample#index"/>
-    <match path="/action/:controller/:action"/>
+    <root to="authentication.login.Login#index"/>
+    <scope name="action">
+        <namespace name="authentication">
+            <get path="login" to="login.Login#index"/>
+            <post path="login/login" to="login.Login#login"/>
+            <post path="logout/logout" to="logout.Logout#logout"/>
+        </namespace>
+        <namespace name="navigation">
+            <get path="home" to="home.Home#index"/>
+        </namespace>
+    </scope>
 </routes>
