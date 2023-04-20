@@ -7,7 +7,7 @@ import nablarch.fw.web.HttpResponse;
 
 /**
  * 疎通確認用のアクションクラス。
- *
+ * <p>
  * 以下の機能について、疎通確認を行う。
  * <ul>
  *     <li>ディスパッチ機能</li>

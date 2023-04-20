@@ -5,6 +5,7 @@ import nablarch.core.util.Base64Util;
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
 import java.security.spec.KeySpec;
@@ -26,28 +27,6 @@ public class PBKDF2PasswordEncryptor implements PasswordEncryptor {
      * 暗号化アルゴリズム名
      */
     private static final String CRYPT_ALGORITHM = "PBKDF2WithHmacSHA256";
-
-    /**
-     * パスワード暗号化のストレッチング回数
-     * <p/>
-     * デフォルト値は 3966
-     */
-    private int iterationCount = 3966;
-
-    /**
-     * 暗号化されたパスワードの長さ（ビット数）
-     * <p/>
-     * デフォルト値は 256
-     */
-    private int keyLength = 256;
-
-    /**
-     * システム共通でソルトに利用する固定文字列
-     * <p/>
-     * デフォルト値は設定されないので、必ず設定が必要。実際のソルトは、この文字列にユーザIDを連結したバイト列となる。
-     */
-    private String fixedSalt;
-
     /**
      * スレッドセーフな {@link SecretKeyFactory} 。
      * <p/>
@@ -62,6 +41,41 @@ public class PBKDF2PasswordEncryptor implements PasswordEncryptor {
                     + "Algorithm name is '" + CRYPT_ALGORITHM + "'.", e);
         }
     });
+    /**
+     * パスワード暗号化のストレッチング回数
+     * <p/>
+     * デフォルト値は 3966
+     */
+    private int iterationCount = 3966;
+    /**
+     * 暗号化されたパスワードの長さ（ビット数）
+     * <p/>
+     * デフォルト値は 256
+     */
+    private int keyLength = 256;
+    /**
+     * システム共通でソルトに利用する固定文字列
+     * <p/>
+     * デフォルト値は設定されないので、必ず設定が必要。実際のソルトは、この文字列にユーザIDを連結したバイト列となる。
+     */
+    private String fixedSalt;
+
+    /**
+     * 暗号化処理に成功したか否かを返す。
+     * <p/>
+     * 暗号化されたパスワードの全ての桁が"0"であれば失敗と判定する。
+     *
+     * @param bytes 暗号化されたパスワード
+     * @return 暗号化に成功していれば{@code true}
+     */
+    private static boolean isSuccessEncryption(byte[] bytes) {
+        for (byte b : bytes) {
+            if (b != 0) {
+                return true;
+            }
+        }
+        return false;
+    }
 
     /**
      * PBKDF2で、パスワードを暗号化し、Base64エンコードを行って返却する。
@@ -88,8 +102,8 @@ public class PBKDF2PasswordEncryptor implements PasswordEncryptor {
         try {
             do {
                 encryptPassword = FACTORY.get()
-                                         .generateSecret(spec)
-                                         .getEncoded();
+                        .generateSecret(spec)
+                        .getEncoded();
             } while (!isSuccessEncryption(encryptPassword));
         } catch (InvalidKeySpecException e) {
             // パスワードが空の場合に発生するが、事前にチェックしているためこの例外は発生しない。
@@ -113,23 +127,6 @@ public class PBKDF2PasswordEncryptor implements PasswordEncryptor {
     }
 
     /**
-     * 暗号化処理に成功したか否かを返す。
-     * <p/>
-     * 暗号化されたパスワードの全ての桁が"0"であれば失敗と判定する。
-     *
-     * @param bytes 暗号化されたパスワード
-     * @return 暗号化に成功していれば{@code true}
-     */
-    private static boolean isSuccessEncryption(byte[] bytes) {
-        for (byte b : bytes) {
-            if (b != 0) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    /**
      * {@link #fixedSalt} と {@code saltSeed} を連結した文字列を、UTF-8でエンコードしたバイト列を返却する。
      *
      * @param saltSeed ソルトを生成するために使用する文字列
@@ -141,7 +138,7 @@ public class PBKDF2PasswordEncryptor implements PasswordEncryptor {
         if (fixed == null) {
             throw new IllegalStateException("Fixed salt string is not set.");
         }
-        return (fixed + saltSeed).getBytes(Charset.forName("UTF-8"));
+        return (fixed + saltSeed).getBytes(StandardCharsets.UTF_8);
     }
 
     /**

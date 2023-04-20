@@ -35,7 +35,7 @@ public final class AuthenticationUtil {
      * パスワードの暗号化に使用する {@link PasswordEncryptor} は、 {@link SystemRepository} から
      * {@value #PASSWORD_ENCRYPTOR} というコンポーネント名で取得する。
      *
-     * @param userId ユーザID
+     * @param userId   ユーザID
      * @param password パスワード（平文）
      * @return 暗号化されたパスワード
      * @see PasswordEncryptor#encrypt(String, String)
@@ -51,15 +51,15 @@ public final class AuthenticationUtil {
      * ユーザの認証に使用する {@link PasswordAuthenticator} は、 {@link SystemRepository} から
      * {@value #AUTHENTICATOR} というコンポーネント名で取得する。
      *
-     * @param userId ユーザID
+     * @param userId   ユーザID
      * @param password パスワード（平文）
      * @throws AuthenticationFailedException 認証に失敗した場合
-     * @throws UserIdLockedException ユーザIDがロックされていた場合
-     * @throws PasswordExpiredException パスワードの有効期限が切れていた場合
+     * @throws UserIdLockedException         ユーザIDがロックされていた場合
+     * @throws PasswordExpiredException      パスワードの有効期限が切れていた場合
      * @see PasswordAuthenticator#authenticate(String, String)
      */
     public static void authenticate(String userId, String password)
-        throws AuthenticationFailedException, UserIdLockedException, PasswordExpiredException {
+            throws AuthenticationFailedException, UserIdLockedException, PasswordExpiredException {
         PasswordAuthenticator authenticator = SystemRepository.get(AUTHENTICATOR);
         authenticator.authenticate(userId, password);
     }

@@ -12,6 +12,7 @@ public interface PasswordEncryptor {
 
     /**
      * パスワードを暗号化する。
+     *
      * @param saltSeed パスワードの暗号化に使用するソルトを生成するために使用する文字列
      * @param password 暗号化前のパスワード
      * @return 暗号化後のパスワード

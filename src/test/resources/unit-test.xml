@@ -4,47 +4,47 @@
         xmlns="http://tis.co.jp/nablarch/component-configuration"
         xsi:schemaLocation="http://tis.co.jp/nablarch/component-configuration https://nablarch.github.io/schema/component-configuration.xsd">
 
-  <!-- メインの設定 -->
-  <import file="web-component-configuration.xml"/>
+    <!-- メインの設定 -->
+    <import file="web-component-configuration.xml"/>
 
-  <!-- テスティングフレームワークの設定 -->
-  <import file="nablarch/test/test-data.xml"/>
-  <import file="nablarch/test/test-transaction.xml"/>
-  <import file="nablarch/test/http-request-test.xml"/>
+    <!-- テスティングフレームワークの設定 -->
+    <import file="nablarch/test/test-data.xml"/>
+    <import file="nablarch/test/test-transaction.xml"/>
+    <import file="nablarch/test/http-request-test.xml"/>
 
-  <!-- 汎用のDB設定 -->
-  <component name="dbInfo" class="nablarch.test.core.db.GenericJdbcDbInfo">
-    <property name="dataSource" ref="dataSource"/>
-    <property name="schema" value="${nablarch.db.schema}"/>
-  </component>
+    <!-- 汎用のDB設定 -->
+    <component name="dbInfo" class="nablarch.test.core.db.GenericJdbcDbInfo">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="schema" value="${nablarch.db.schema}"/>
+    </component>
 
-  <!-- メインを上書きする設定 -->
-  <import file="override_test.xml"/>
-  <import file="override_dev.xml"/>
+    <!-- メインを上書きする設定 -->
+    <import file="override_test.xml"/>
+    <import file="override_dev.xml"/>
 
-  <!--
-  マスタデータ復旧設定
-  マスタデータ復旧を使用する際には、いくつかの手順が必要になります。
-  設定追加・変更手順を参照して設定してください。
-  -->
-  <component name="masterDataRestorer"
-             class="nablarch.test.core.db.MasterDataRestorer">
-    <!-- バックアップスキーマ -->
-    <property name="backupSchema" value="PUBLIC"/>
-    <!-- 監視対象テーブル一覧 -->
-    <property name="tablesTobeWatched">
-      <list></list>
-    </property>
-  </component>
+    <!--
+    マスタデータ復旧設定
+    マスタデータ復旧を使用する際には、いくつかの手順が必要になります。
+    設定追加・変更手順を参照して設定してください。
+    -->
+    <component name="masterDataRestorer"
+               class="nablarch.test.core.db.MasterDataRestorer">
+        <!-- バックアップスキーマ -->
+        <property name="backupSchema" value="PUBLIC"/>
+        <!-- 監視対象テーブル一覧 -->
+        <property name="tablesTobeWatched">
+            <list></list>
+        </property>
+    </component>
 
-<!-- マスタデータ復旧機能の登録 -->
-<!--
-  <list name="testEventListeners">
-    <component class="nablarch.test.RepositoryInitializer"/>
-    <component-ref name="masterDataRestorer"/>
-  </list>
--->
+    <!-- マスタデータ復旧機能の登録 -->
+    <!--
+      <list name="testEventListeners">
+        <component class="nablarch.test.RepositoryInitializer"/>
+        <component-ref name="masterDataRestorer"/>
+      </list>
+    -->
 
-  <!-- テスト用HttpServerにJetty6を定義する -->
-  <component name="httpServerFactory" class="nablarch.fw.web.httpserver.HttpServerFactoryJetty6"/>
+    <!-- テスト用HttpServerにJetty6を定義する -->
+    <component name="httpServerFactory" class="nablarch.fw.web.httpserver.HttpServerFactoryJetty6"/>
 </component-configuration>

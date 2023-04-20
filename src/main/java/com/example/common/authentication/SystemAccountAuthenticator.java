@@ -33,19 +33,26 @@ import java.sql.Date;
  */
 public class SystemAccountAuthenticator implements PasswordAuthenticator {
 
-    /** ユーザIDをロックする認証失敗回数 */
+    /**
+     * SQL_IDのプレフィックス
+     */
+    private static final String SQL_ID_PREFIX = SystemAccountAuthenticator.class.getName() + '#';
+    /**
+     * ユーザIDをロックする認証失敗回数
+     */
     private int failedCountToLock;
-
-    /** パスワードの暗号化に使用する{@link PasswordEncryptor} */
+    /**
+     * パスワードの暗号化に使用する{@link PasswordEncryptor}
+     */
     private PasswordEncryptor passwordEncryptor;
-
-    /** データベースへのトランザクション制御を行う{@link SimpleDbTransactionManager} */
+    /**
+     * データベースへのトランザクション制御を行う{@link SimpleDbTransactionManager}
+     */
     private SimpleDbTransactionManager dbManager;
 
-    /** SQL_IDのプレフィックス */
-    private static final String SQL_ID_PREFIX = SystemAccountAuthenticator.class.getName() + '#';
-
-    /** デフォルトコンストラクタ。 */
+    /**
+     * デフォルトコンストラクタ。
+     */
     public SystemAccountAuthenticator() {
         failedCountToLock = 0;
     }
@@ -80,16 +87,15 @@ public class SystemAccountAuthenticator implements PasswordAuthenticator {
     /**
      * アカウント情報を使用してユーザを認証する。
      *
-     * @param userId ユーザID
+     * @param userId   ユーザID
      * @param password パスワード
-     *
      * @throws AuthenticationFailedException ユーザIDまたはパスワードに一致するユーザが見つからない場合
-     * @throws UserIdLockedException ユーザIDがロックされている場合。この例外がスローされる場合は、まだ認証を実施していない。
-     * @throws PasswordExpiredException パスワードが有効期限切れの場合。この例外がスローされる場合は、古いパスワードによる認証に成功している。
+     * @throws UserIdLockedException         ユーザIDがロックされている場合。この例外がスローされる場合は、まだ認証を実施していない。
+     * @throws PasswordExpiredException      パスワードが有効期限切れの場合。この例外がスローされる場合は、古いパスワードによる認証に成功している。
      */
     @Override
     public void authenticate(final String userId, final String password)
-        throws AuthenticationFailedException, UserIdLockedException, PasswordExpiredException {
+            throws AuthenticationFailedException, UserIdLockedException, PasswordExpiredException {
 
         if (userId == null || password == null) {
             throw new AuthenticationFailedException(userId);
@@ -113,16 +119,15 @@ public class SystemAccountAuthenticator implements PasswordAuthenticator {
     /**
      * システムアカウントに対してパスワードによる認証を行う。
      *
-     * @param account システムアカウント
+     * @param account  システムアカウント
      * @param password パスワード
-     * @param sysDate 現在日付
-     *
+     * @param sysDate  現在日付
      * @throws AuthenticationFailedException ユーザIDまたはパスワードに一致するユーザが見つからない場合
-     * @throws UserIdLockedException ユーザIDがロックされている場合。この例外がスローされる場合は、まだ認証を実施していない。
-     * @throws PasswordExpiredException パスワードが有効期限切れの場合。この例外がスローされる場合は、古いパスワードによる認証に成功している。
+     * @throws UserIdLockedException         ユーザIDがロックされている場合。この例外がスローされる場合は、まだ認証を実施していない。
+     * @throws PasswordExpiredException      パスワードが有効期限切れの場合。この例外がスローされる場合は、古いパスワードによる認証に成功している。
      */
     private void authenticate(SystemAccount account, String password, Date sysDate)
-        throws AuthenticationFailedException, UserIdLockedException, PasswordExpiredException {
+            throws AuthenticationFailedException, UserIdLockedException, PasswordExpiredException {
 
         if (account.isUserIdLocked()) {
             throw new UserIdLockedException(String.valueOf(account.getUserId()), failedCountToLock);
@@ -199,7 +204,7 @@ public class SystemAccountAuthenticator implements PasswordAuthenticator {
                 statement.executeUpdate();
                 return null;
             }
-        } .doTransaction();
+        }.doTransaction();
     }
 
     /**
@@ -208,7 +213,8 @@ public class SystemAccountAuthenticator implements PasswordAuthenticator {
      * 本サンプルでは、認証失敗回数の更新と失敗回数がロック回数に達した場合のロックのみ行う。
      * 認証失敗時のロックを実施しない場合はこのメソッド内では何も行わない。
      * </pre>
-     * @param id 更新対象のシステムアカウントを特定するID
+     *
+     * @param id          更新対象のシステムアカウントを特定するID
      * @param failedCount 失敗回数
      */
     private void updateAuthenticationFailed(final Integer id, final Short failedCount) {
@@ -229,7 +235,7 @@ public class SystemAccountAuthenticator implements PasswordAuthenticator {
                 statement.executeUpdate();
                 return null;
             }
-        } .doTransaction();
+        }.doTransaction();
     }
 }
 

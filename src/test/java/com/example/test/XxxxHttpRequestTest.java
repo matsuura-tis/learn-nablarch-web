@@ -17,6 +17,7 @@ import java.lang.annotation.Target;
 public @interface XxxxHttpRequestTest {
     /**
      * ベースURI。
+     *
      * @return ベースURI
      */
     String baseUri();

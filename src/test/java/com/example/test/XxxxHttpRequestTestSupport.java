@@ -22,8 +22,9 @@ public class XxxxHttpRequestTestSupport
 
     /**
      * コンストラクタ。
+     *
      * @param testClass テストクラス
-     * @param baseUri ベースURI
+     * @param baseUri   ベースURI
      */
     public XxxxHttpRequestTestSupport(Class<?> testClass, String baseUri) {
         super(testClass);
