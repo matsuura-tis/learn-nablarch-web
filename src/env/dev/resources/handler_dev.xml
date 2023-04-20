@@ -25,7 +25,7 @@
                 <component class="nablarch.fw.hotdeploy.HotDeployHandler">
                     <property name="targetPackages">
                         <list>
-                            <value>com.example.action</value>
+                            <value>com.example</value>
                         </list>
                     </property>
                 </component>
