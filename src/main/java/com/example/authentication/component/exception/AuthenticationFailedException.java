@@ -1,4 +1,4 @@
-package com.example.common.authentication.exception;
+package com.example.authentication.component.exception;
 
 /**
  * アカウント情報の不一致により認証に失敗した場合に発生する例外。

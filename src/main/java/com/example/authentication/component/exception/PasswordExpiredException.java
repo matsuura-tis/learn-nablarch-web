@@ -1,4 +1,4 @@
-package com.example.common.authentication.exception;
+package com.example.authentication.component.exception;
 
 import java.util.Date;
 

@@ -102,10 +102,10 @@
 
     <!-- 認証コンポーネント設定 -->
     <!-- https://nablarch.github.io/docs/LATEST/doc/examples/01/index.html#systemaccountauthenticator -->
-    <component name="passwordEncryptor" class="com.example.common.authentication.encrypt.PBKDF2PasswordEncryptor">
+    <component name="passwordEncryptor" class="com.example.authentication.component.encrypt.PBKDF2PasswordEncryptor">
         <property name="fixedSalt" value="1604d9b27d1c9ca046ab6cafc3b7830b"/>
     </component>
-    <component name="authenticator" class="com.example.common.authentication.SystemAccountAuthenticator">
+    <component name="authenticator" class="com.example.authentication.component.SystemAccountAuthenticator">
         <property name="failedCountToLock" value="5"/>
         <property name="passwordEncryptor" ref="passwordEncryptor"/>
         <property name="dbManager">

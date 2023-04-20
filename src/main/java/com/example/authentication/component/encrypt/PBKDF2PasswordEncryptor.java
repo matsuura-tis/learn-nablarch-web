@@ -1,10 +1,9 @@
-package com.example.common.authentication.encrypt;
+package com.example.authentication.component.encrypt;
 
 import nablarch.core.util.Base64Util;
 
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
-import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;

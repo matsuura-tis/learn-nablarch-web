@@ -1,9 +1,9 @@
-package com.example.common.authentication;
+package com.example.authentication.component;
 
-import com.example.common.authentication.encrypt.PasswordEncryptor;
-import com.example.common.authentication.exception.AuthenticationFailedException;
-import com.example.common.authentication.exception.PasswordExpiredException;
-import com.example.common.authentication.exception.UserIdLockedException;
+import com.example.authentication.component.encrypt.PasswordEncryptor;
+import com.example.authentication.component.exception.AuthenticationFailedException;
+import com.example.authentication.component.exception.PasswordExpiredException;
+import com.example.authentication.component.exception.UserIdLockedException;
 import nablarch.core.repository.SystemRepository;
 
 /**

@@ -1,4 +1,4 @@
-package com.example.common.authentication.encrypt;
+package com.example.authentication.component.encrypt;
 
 
 /**

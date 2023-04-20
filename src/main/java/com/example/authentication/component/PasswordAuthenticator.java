@@ -1,6 +1,6 @@
-package com.example.common.authentication;
+package com.example.authentication.component;
 
-import com.example.common.authentication.exception.AuthenticationException;
+import com.example.authentication.component.exception.AuthenticationException;
 
 /**
  * ユーザの認証を行うインタフェース。
