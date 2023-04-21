@@ -35,8 +35,8 @@ class SampleActionRequestTest {
      */
     private boolean is404Error(ComparisonFailure error) {
         return error.getMessage().contains("[HTTP STATUS]")
-                && error.getExpected().equals("200")
-                && error.getActual().equals("404");
+            && error.getExpected().equals("200")
+            && error.getActual().equals("404");
     }
 
     /**
@@ -48,10 +48,10 @@ class SampleActionRequestTest {
     private AssertionError createError(ComparisonFailure cause) {
         String basePackage = SystemRepository.getString("nablarch.commonProperty.basePackage");
         String msg = "期待しない404エラーが発生しました。\n" +
-                "コンポーネント'packageMapping'の設定に誤りの可能性があります。\n" +
-                "環境設定項目${nablarch.commonProperty.basePackage}が正しく設定されているか確認してください。\n" +
-                "現在の設定値=[" + basePackage + "].\n" +
-                cause.getMessage();
+            "コンポーネント'packageMapping'の設定に誤りの可能性があります。\n" +
+            "環境設定項目${nablarch.commonProperty.basePackage}が正しく設定されているか確認してください。\n" +
+            "現在の設定値=[" + basePackage + "].\n" +
+            cause.getMessage();
         return new AssertionError(msg);
     }
 }

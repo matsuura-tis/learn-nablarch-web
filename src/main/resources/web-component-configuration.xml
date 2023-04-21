@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <component-configuration
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://tis.co.jp/nablarch/component-configuration"
-    xsi:schemaLocation="http://tis.co.jp/nablarch/component-configuration  https://nablarch.github.io/schema/component-configuration.xsd">
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://tis.co.jp/nablarch/component-configuration"
+  xsi:schemaLocation="http://tis.co.jp/nablarch/component-configuration  https://nablarch.github.io/schema/component-configuration.xsd">
 
   <!-- テーブル定義 -->
-  <import file="nablarch/schema-config.xml" />
+  <import file="nablarch/schema-config.xml"/>
 
   <!-- 精査に使用する文字集合定義 -->
   <import file="nablarch/core/validation/charset-definition.xml"/>
@@ -14,7 +14,7 @@
   <component name="domainManager" class="com.example.domain.SampleDomainManager"/>
 
   <!-- BeanValidation実装クラス -->
-  <component name="validationStrategy" class="nablarch.common.web.validator.BeanValidationStrategy" />
+  <component name="validationStrategy" class="nablarch.common.web.validator.BeanValidationStrategy"/>
 
   <!-- 環境設定ファイル -->
   <config-file file="common.properties"/>
@@ -26,7 +26,7 @@
   <!-- メッセージ機能の設定 -->
   <import file="nablarch/core/message-by-property-files.xml"/>
   <!-- 自動採番型を持たないRDBMSで、ユニバーサルDAOを使用するための設定 -->
-  <import file="nablarch/common/dao.xml" />
+  <import file="nablarch/common/dao.xml"/>
 
   <!-- web固有設定の読み込み -->
   <!-- データベース設定 -->
@@ -39,22 +39,22 @@
   <import file="nablarch/webui/db-for-webui.xml"/>
 
   <!-- エラーページ設定 -->
-  <import file="nablarch/webui/error-page-for-webui.xml" />
+  <import file="nablarch/webui/error-page-for-webui.xml"/>
 
   <!-- ファイルパス設置 -->
-  <import file="nablarch/webui/filepath-for-webui.xml" />
+  <import file="nablarch/webui/filepath-for-webui.xml"/>
 
   <!-- インターセプタの実行順定義 -->
-  <import file="nablarch/webui/interceptors.xml" />
+  <import file="nablarch/webui/interceptors.xml"/>
 
   <!-- ファイルアップロード機能設定 -->
-  <import file="nablarch/webui/multipart.xml" />
+  <import file="nablarch/webui/multipart.xml"/>
 
   <!-- カスタムタグ設定 -->
-  <import file="nablarch/webui/nablarch-tag.xml" />
+  <import file="nablarch/webui/nablarch-tag.xml"/>
 
   <!-- 二重サブミット防止機能 -->
-  <import file="nablarch/webui/double-submission.xml" />
+  <import file="nablarch/webui/double-submission.xml"/>
 
   <!-- スレッドコンテキストハンドラ -->
   <import file="nablarch/webui/threadcontext-for-webui-in-sessionstore.xml"/>
@@ -67,14 +67,14 @@
   <!-- パッケージマッピングの設定 -->
   <component name="packageMapping"
              class="nablarch.integration.router.RoutesMapping">
-      <property name="routes" value="routes.xml"/>
-      <property name="baseUri" value="" />
-      <property name="checkInterval" value="${nablarch.routesMapping.checkInterval}"/>
-      <property name="basePackage" value="${nablarch.commonProperty.basePackage}" />
+    <property name="routes" value="routes.xml"/>
+    <property name="baseUri" value=""/>
+    <property name="checkInterval" value="${nablarch.routesMapping.checkInterval}"/>
+    <property name="basePackage" value="${nablarch.commonProperty.basePackage}"/>
   </component>
 
   <!-- セッションストア機能 -->
-  <import file="nablarch/webui/session-store.xml" />
+  <import file="nablarch/webui/session-store.xml"/>
   <!-- TODO: アプリケーションサーバが冗長化されている場合は、HIDDENストアの暗号化に使用するコンポーネントのプロパティに明示的に暗号化/復号のキーを設定する。-->
   <!--
   <component name="hiddenStoreEncryptor" class="nablarch.common.encryption.AesEncryptor">
@@ -83,22 +83,22 @@
   </component>
   -->
 
-  <component name="httpErrorHandler" class="nablarch.fw.web.handler.HttpErrorHandler" >
+  <component name="httpErrorHandler" class="nablarch.fw.web.handler.HttpErrorHandler">
     <property name="defaultPages">
       <map>
         <!-- TODO: 適切なエラー画面作成して設定してください。設定の際は、あわせてweb.xmlも修正してください -->
-        <entry key="4.." value="/errorPages/USER_ERROR.jsp" />
-        <entry key="403" value="/errorPages/PERMISSION-ERROR.jsp" />
-        <entry key="404" value="/errorPages/PAGE_NOT_FOUND_ERROR.jsp" />
-        <entry key="413" value="/errorPages/REQUEST_ENTITY_TOO_LARGE.jsp" />
-        <entry key="5.." value="/errorPages/ERROR.jsp" />
-        <entry key="503" value="/errorPages/SERVICE-UNAVAILABLE-ERROR.jsp" />
+        <entry key="4.." value="/errorPages/USER_ERROR.jsp"/>
+        <entry key="403" value="/errorPages/PERMISSION-ERROR.jsp"/>
+        <entry key="404" value="/errorPages/PAGE_NOT_FOUND_ERROR.jsp"/>
+        <entry key="413" value="/errorPages/REQUEST_ENTITY_TOO_LARGE.jsp"/>
+        <entry key="5.." value="/errorPages/ERROR.jsp"/>
+        <entry key="503" value="/errorPages/SERVICE-UNAVAILABLE-ERROR.jsp"/>
       </map>
     </property>
   </component>
 
   <!-- ダイアレクト設定 -->
-  <component name="dialect" class="nablarch.core.db.dialect.PostgreSQLDialect" />
+  <component name="dialect" class="nablarch.core.db.dialect.PostgreSQLDialect"/>
 
 
   <!-- ハンドラキュー構成 -->
@@ -115,21 +115,21 @@
 
         <component class="nablarch.fw.web.handler.HttpResponseHandler"/>
 
-        <component class="nablarch.fw.web.handler.SecureHandler" />
+        <component class="nablarch.fw.web.handler.SecureHandler"/>
 
         <component-ref name="multipartHandler"/>
 
-        <component-ref name="sessionStoreHandler" />
+        <component-ref name="sessionStoreHandler"/>
 
         <component-ref name="threadContextHandler"/>
 
         <component class="nablarch.common.web.handler.HttpAccessLogHandler"/>
 
-        <component class="nablarch.fw.web.handler.NormalizationHandler" />
+        <component class="nablarch.fw.web.handler.NormalizationHandler"/>
 
         <component class="nablarch.fw.web.handler.ForwardingHandler"/>
 
-        <component-ref name="httpErrorHandler" />
+        <component-ref name="httpErrorHandler"/>
 
         <component-ref name="nablarchTagHandler"/>
 
@@ -149,13 +149,13 @@
     <property name="initializeList">
       <list>
         <!-- web/code.xml:コードのローダ -->
-        <component-ref name="codeLoader" />
+        <component-ref name="codeLoader"/>
         <!-- web/code.xml:コードのキャッシュ -->
-        <component-ref name="codeCache" />
+        <component-ref name="codeCache"/>
         <!-- web/message-by-property-files.xml:リソースのキャッシュ -->
-        <component-ref name="stringResourceCache" />
+        <component-ref name="stringResourceCache"/>
         <!-- web/session-store.xml:DBストア-->
-        <component-ref name="dbStore" />
+        <component-ref name="dbStore"/>
         <!-- パッケージマッピング-->
         <component-ref name="packageMapping"/>
       </list>

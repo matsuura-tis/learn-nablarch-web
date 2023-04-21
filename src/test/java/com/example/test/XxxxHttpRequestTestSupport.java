@@ -16,14 +16,15 @@ import nablarch.test.core.http.TestCaseInfo;
  */
 // TODO XxxxをPJ名に変更してください(例:MyProjectHttpRequestTestSupport)。
 public class XxxxHttpRequestTestSupport
-        extends AbstractHttpRequestTestTemplate<TestCaseInfo> {
+    extends AbstractHttpRequestTestTemplate<TestCaseInfo> {
 
     private final String baseUri;
 
     /**
      * コンストラクタ。
+     *
      * @param testClass テストクラス
-     * @param baseUri ベースURI
+     * @param baseUri   ベースURI
      */
     public XxxxHttpRequestTestSupport(Class<?> testClass, String baseUri) {
         super(testClass);

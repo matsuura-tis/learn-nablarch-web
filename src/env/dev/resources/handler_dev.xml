@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <component-configuration
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://tis.co.jp/nablarch/component-configuration"
-    xsi:schemaLocation="http://tis.co.jp/nablarch/component-configuration  https://nablarch.github.io/schema/component-configuration.xsd">
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://tis.co.jp/nablarch/component-configuration"
+  xsi:schemaLocation="http://tis.co.jp/nablarch/component-configuration  https://nablarch.github.io/schema/component-configuration.xsd">
 
-    <!-- ハンドラキュー構成 -->
+  <!-- ハンドラキュー構成 -->
   <component name="webFrontController"
              class="nablarch.fw.web.servlet.WebFrontController">
 
@@ -15,11 +15,11 @@
         <component class="nablarch.fw.handler.GlobalErrorHandler"/>
         <component class="nablarch.fw.web.handler.HttpResponseHandler"/>
 
-        <component class="nablarch.fw.web.handler.SecureHandler" />
+        <component class="nablarch.fw.web.handler.SecureHandler"/>
 
         <component-ref name="multipartHandler"/>
 
-        <component-ref name="sessionStoreHandler" />
+        <component-ref name="sessionStoreHandler"/>
 
         <!-- ホットデプロイハンドラ -->
         <component class="nablarch.fw.hotdeploy.HotDeployHandler">
@@ -34,11 +34,11 @@
 
         <component class="nablarch.common.web.handler.HttpAccessLogHandler"/>
 
-        <component class="nablarch.fw.web.handler.NormalizationHandler" />
+        <component class="nablarch.fw.web.handler.NormalizationHandler"/>
 
         <component class="nablarch.fw.web.handler.ForwardingHandler"/>
 
-        <component-ref name="httpErrorHandler" />
+        <component-ref name="httpErrorHandler"/>
 
         <component-ref name="nablarchTagHandler"/>
 
