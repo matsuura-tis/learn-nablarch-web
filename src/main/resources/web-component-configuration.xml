@@ -142,6 +142,56 @@
     </property>
   </component>
 
+  <!-- REST API のパッケージマッピングの設定 -->
+  <component name="jaxrsPackageMapping"
+             class="nablarch.integration.router.PathOptionsProviderRoutesMapping">
+    <property name="pathOptionsProvider">
+      <component class="nablarch.integration.router.jaxrs.JaxRsPathOptionsProvider">
+        <property name="applicationPath" value="${nablarch.webApi.applicationPath}"/>
+        <property name="basePackage" value="${nablarch.commonProperty.basePackage}"/>
+      </component>
+    </property>
+    <property name="methodBinderFactory">
+      <component class="nablarch.fw.jaxrs.JaxRsMethodBinderFactory">
+        <property name="handlerList">
+          <component class="nablarch.integration.jaxrs.jersey.JerseyJaxRsHandlerListFactory"/>
+        </property>
+      </component>
+    </property>
+  </component>
+
+  <component name="jaxrsController" class="nablarch.fw.web.servlet.WebFrontController">
+    <property name="handlerQueue">
+      <list>
+        <component class="nablarch.fw.web.handler.HttpCharacterEncodingHandler"/>
+        <component class="nablarch.common.handler.threadcontext.ThreadContextClearHandler"/>
+        <component class="nablarch.fw.handler.GlobalErrorHandler"/>
+        <component class="nablarch.fw.jaxrs.JaxRsResponseHandler">
+          <property name="responseFinishers">
+            <list>
+              <component class="nablarch.fw.jaxrs.AdoptHandlerResponseFinisher">
+                <property name="handler">
+                  <component class="nablarch.fw.web.handler.SecureHandler">
+                    <property name="secureResponseHeaderList">
+                      <list>
+                        <component class="nablarch.fw.web.handler.secure.ContentTypeOptionsHeader"/>
+                        <component class="nablarch.fw.web.handler.secure.ReferrerPolicyHeader"/>
+                        <component class="nablarch.fw.web.handler.secure.CacheControlHeader"/>
+                      </list>
+                    </property>
+                  </component>
+                </property>
+              </component>
+            </list>
+          </property>
+        </component>
+        <component-ref name="threadContextHandler"/>
+        <component class="nablarch.common.web.handler.HttpAccessLogHandler"/>
+        <component-ref name="dbConnectionManagementHandler"/>
+        <component-ref name="jaxrsPackageMapping"/>
+      </list>
+    </property>
+  </component>
 
   <!-- 初期化が必要なコンポーネント -->
   <component name="initializer"
@@ -158,6 +208,7 @@
         <component-ref name="dbStore"/>
         <!-- パッケージマッピング-->
         <component-ref name="packageMapping"/>
+        <component-ref name="jaxrsPackageMapping"/>
       </list>
     </property>
   </component>

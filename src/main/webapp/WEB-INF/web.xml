@@ -31,9 +31,19 @@
     <filter-class>nablarch.fw.web.servlet.RepositoryBasedWebFrontController</filter-class>
   </filter>
 
+  <filter>
+    <filter-name>jaxrsEntryPoint</filter-name>
+    <filter-class>nablarch.fw.web.servlet.RepositoryBasedWebFrontController</filter-class>
+    <init-param>
+      <param-name>controllerName</param-name>
+      <param-value>jaxrsController</param-value>
+    </init-param>
+  </filter>
+
   <!--
     以下のURLをアプリケーションに応答させる設定。
     ・/action/から始まるURL
+    ・/api/から始まるURL
     ・コンテキストルート直下
     (他のURL(画像等のURL)は、APサーバが応答する)
   -->
@@ -42,6 +52,11 @@
     <url-pattern>/action/*</url-pattern>
     <url-pattern>/</url-pattern>
   </filter-mapping>
+  <filter-mapping>
+    <filter-name>jaxrsEntryPoint</filter-name>
+    <url-pattern>/api/*</url-pattern>
+  </filter-mapping>
+
 
   <session-config>
     <session-timeout>30</session-timeout>
